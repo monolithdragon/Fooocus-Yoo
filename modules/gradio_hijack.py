@@ -197,7 +197,7 @@ class Image(
 
     @staticmethod
     def update(
-        value: Any | Literal(_Keywords.NO_VALUE) | None = _Keywords.NO_VALUE,
+        value: Any | Literal[_Keywords.NO_VALUE] | None = _Keywords.NO_VALUE,
         height: int | None = None,
         width: int | None = None,
         label: str | None = None,
