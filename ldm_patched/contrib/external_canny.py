@@ -1,4 +1,4 @@
-# https://github.com/comfyanonymous/ComfyUI/blob/master/nodes.py 
+# https://github.com/comfyanonymous/ComfyUI/blob/master/nodes.py
 
 #From https://github.com/kornia/kornia
 import math
@@ -6,6 +6,8 @@ import math
 import torch
 import torch.nn.functional as F
 import ldm_patched.modules.model_management
+
+Tensor = torch.Tensor
 
 def get_canny_nms_kernel(device=None, dtype=None):
     """Utility function that returns 3x3 kernels for the Canny Non-maximal suppression."""
@@ -66,6 +68,15 @@ def get_sobel_kernel2d(device=None, dtype=None):
     kernel_x = torch.tensor([[-1.0, 0.0, 1.0], [-2.0, 0.0, 2.0], [-1.0, 0.0, 1.0]], device=device, dtype=dtype)
     kernel_y = kernel_x.transpose(0, 1)
     return torch.stack([kernel_x, kernel_y])
+
+def normalize_kernel2d(input: torch.Tensor) -> torch.Tensor:
+    r"""Normalizes both derivative and smoothing kernel.
+    """
+    if len(input.size()) < 2:
+        raise TypeError("input should be at least 2D tensor. Got {}"
+                        .format(input.size()))
+    norm: Tensor = input.abs().sum(dim=-1).sum(dim=-1)
+    return input / (norm.unsqueeze(-1).unsqueeze(-1))
 
 def spatial_gradient(input, normalized: bool = True):
     r"""Compute the first order image derivative in both x and y using a Sobel operator.
