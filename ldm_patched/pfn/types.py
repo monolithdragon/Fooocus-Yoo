@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Optional, Union
 
 from .architecture.DAT import DAT
 from .architecture.face.codeformer import CodeFormer
@@ -54,7 +54,7 @@ def is_pytorch_face_model(model: object):
 
 
 PyTorchInpaintModels = (LaMa,)
-PyTorchInpaintModel = Union(LaMa)
+PyTorchInpaintModel = Optional[LaMa]
 
 
 def is_pytorch_inpaint_model(model: object):
