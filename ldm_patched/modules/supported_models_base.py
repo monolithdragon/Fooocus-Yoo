@@ -1,4 +1,3 @@
-import torch
 from . import model_base
 from . import utils
 from . import latent_formats

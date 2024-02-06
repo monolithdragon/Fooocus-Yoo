@@ -1,4 +1,4 @@
-from modules.expansion import FooocusExpansion
+from extras.expansion import FooocusExpansion
 
 expansion = FooocusExpansion()
 

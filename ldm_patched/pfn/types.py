@@ -54,7 +54,7 @@ def is_pytorch_face_model(model: object):
 
 
 PyTorchInpaintModels = (LaMa,)
-PyTorchInpaintModel = Union[LaMa]
+PyTorchInpaintModel = Union(LaMa)
 
 
 def is_pytorch_inpaint_model(model: object):

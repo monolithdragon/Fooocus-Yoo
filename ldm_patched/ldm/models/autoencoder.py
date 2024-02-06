@@ -1,14 +1,19 @@
+import math
 import torch
+import logging
 # import pytorch_lightning as pl
 import torch.nn.functional as F
 from contextlib import contextmanager
 from typing import Any, Dict, List, Optional, Tuple, Union
 
+from ldm_patched.ldm.models.regularizer import AbstractRegularizer
 from ldm_patched.ldm.modules.distributions.distributions import DiagonalGaussianDistribution
 
-from ldm_patched.ldm.util import instantiate_from_config
+from ldm_patched.ldm.util import get_obj_from_str, instantiate_from_config
 from ldm_patched.ldm.modules.ema import LitEma
 import ldm_patched.modules.ops
+
+logpy = logging.getLogger(__name__)
 
 class DiagonalGaussianRegularizer(torch.nn.Module):
     def __init__(self, sample: bool = True):
